@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent } from "react";
 import type { GenerateInput, GenerateResult } from "@/lib/types";
+import { WORKER_URL } from "@/lib/config";
 
 // Curated, genuinely useful starting topics. Selecting one fills the topic
 // field; the user can also type their own topic.
@@ -27,27 +28,48 @@ export default function Generator({ onResult }: GeneratorProps) {
     e.preventDefault();
     if (loading) return;
 
+    // Basic client-side sanity before we spend a network round-trip or any
+    // free-tier quota on nonsense input. Mirrors the worker's own validation.
+    const topicValue = topic.trim();
+    if (topicValue.length < 3) {
+      setError("Please enter a topic that is at least 3 characters long.");
+      return;
+    }
+
     setError(null);
     setLoading(true);
 
-    const payload: GenerateInput = { topic: topic.trim() };
+    // If the site owner hasn't wired this build to a Worker yet, don't make a
+    // doomed request — tell the visitor what's missing instead.
+    if (!WORKER_URL) {
+      setError(
+        "This build of the generator is not connected to a backend yet. The site owner must set NEXT_PUBLIC_WORKER_URL to the Cloudflare Worker URL and rebuild."
+      );
+      setLoading(false);
+      return;
+    }
+
+    const payload: GenerateInput = { topic: topicValue };
 
     try {
-      const res = await fetch("/api/generate", {
+      const res = await fetch(WORKER_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
       if (!res.ok) {
-        setError(data?.error ?? "Something went wrong. Please try again.");
+        setError(
+          (data as { error?: string } | null)?.error ??
+            "The generation service returned an error. Please try again."
+        );
         setLoading(false);
         return;
       }
       onResult(data as GenerateResult);
     } catch {
       setError(
-        "Live generation requires a running AI backend (Ollama or an API key). This static deployment cannot host the backend — clone the repo and run it locally to generate results."
+        "Could not reach the generation service. Please check your connection and try again."
       );
     } finally {
       setLoading(false);

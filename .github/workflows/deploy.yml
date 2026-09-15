@@ -37,6 +37,11 @@ jobs:
         run: npm test
 
       - name: Build static export
+        env:
+          # Inlined into the static bundle at build time by Next.js. Set as a
+          # plain repository *variable* (not a secret) named WORKER_URL under
+          # Settings → Secrets and variables → Actions → Variables.
+          NEXT_PUBLIC_WORKER_URL: ${{ vars.WORKER_URL }}
         run: npm run build
 
       # GitHub Pages (via the deploy-pages action) won't run Jekyll, but a

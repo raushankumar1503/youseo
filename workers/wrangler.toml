@@ -1,0 +1,18 @@
+# Cloudflare Worker config for the YouSEO generation backend.
+# The Gemini API key is NOT stored here — it lives as a secret binding named
+# GEMINI_API_KEY, set with:  npx wrangler secret put GEMINI_API_KEY
+#
+# Deployment (from this workers/ directory):
+#   npx wrangler login
+#   npx wrangler secret put GEMINI_API_KEY
+#   npx wrangler deploy
+name = "youseo-generator"
+main = "src/index.js"
+compatibility_date = "2024-11-01"
+
+# The Gemini API model to use. Set to the model this API key's free tier
+# provides (confirmed via the Worker's GET /models diagnostic). Commanded by
+# Gemini when the previous default became unavailable; confirm at
+# https://ai.google.dev/gemini-api/docs/models.
+[vars]
+GEMINI_MODEL = "gemini-3.6-flash"
