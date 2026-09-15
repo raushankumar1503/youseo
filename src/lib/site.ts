@@ -13,7 +13,12 @@ export const SITE = {
     "Generate SEO-friendly YouTube titles, descriptions, and tags from your video topic — plus practical guides on YouTube search and growth.",
   author: "Raushan Kumar",
   authorRole: "Founder & Editor",
-  email: "hello@youtubeseo.example.com", // TODO(customization): set your real contact email
+  // CONFIGURATION: set your real public contact email here (a plain string,
+  // e.g. "you@yourdomain.com"). Keep it as "" to hide the public contact
+  // form and the mailto link on the Contact page (both gracefully fall back
+  // to a "getting in touch" notice). Never ship a placeholder like
+  // "x@example.com" in production.
+  email: "raushansharma152003@gmail.com",
   language: "en",
 } as const;
 

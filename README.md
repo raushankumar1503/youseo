@@ -52,7 +52,11 @@ The generator reads one public value, inlined at build time:
 | `NEXT_PUBLIC_WORKER_URL` | The Worker URL the frontend calls to generate. Leave empty to see a clear "not configured" message instead of a doomed request. |
 
 The site URL and identity constants live in `src/lib/site.ts` (hardcoded, not
-from env). There is no `POST /api/generate` route anymore.
+from env). The **public contact email** is configured in `SITE.email` there too:
+set it to your real address (e.g. `you@yourdomain.com`) to show the Contact form
+and mailto link. If you leave it `""`, the Contact page shows a friendly
+"getting it ready" notice instead of a dead email form. Do not ship a placeholder
+like `x@example.com`. There is no `POST /api/generate` route anymore.
 
 ## Setup: Cloudflare Worker + Gemini (one-time, run by you)
 

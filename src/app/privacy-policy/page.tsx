@@ -22,8 +22,7 @@ export default function PrivacyPage() {
         When you use the generator, the topic you type is sent to the server in
         a single request to produce titles, descriptions, and tags. It is used
         only for that request and is not stored in a database or associated with
-        your identity. If you use the local AI option (Ollama), the request
-        stays on your own computer.
+        your identity.
       </p>
 
       <h2 className="text-base font-semibold text-neutral-900">

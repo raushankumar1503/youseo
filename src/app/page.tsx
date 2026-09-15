@@ -12,11 +12,11 @@ import { SITE } from "@/lib/site";
 const FAQS = [
   {
     q: "Is the YouTube SEO Generator free to use?",
-    a: "Yes. The generator is free. It runs on an AI model — a local one via Ollama on your machine, or an OpenAI-compatible cloud key you optionally provide. There is no account and no payment.",
+    a: "Yes. The generator is free — there is no account, no payment, and nothing to install or configure. Enter a topic and you get a title, a description, and tags right away.",
   },
   {
     q: "Do I need to connect an AI service to use it?",
-    a: "If you have Ollama installed locally with a model like llama3.2 pulled, the tool uses it with no key required. Otherwise, set an AI_API_KEY and AI_MODEL (an OpenAI-compatible endpoint) in your .env.local. Without either, the generator shows a clear setup message.",
+    a: "No. It works right in your browser — type a topic, press Generate, and the results come back in a few seconds. There is no sign-up and nothing to set up on your side.",
   },
   {
     q: "Does the tool guarantee my video will rank or get views?",
@@ -46,6 +46,7 @@ const FAQS = [
 
 export default function HomePage() {
   const [result, setResult] = useState<GenerateResult | null>(null);
+  const [lastTopic, setLastTopic] = useState("");
 
   return (
     <>
@@ -86,11 +87,17 @@ export default function HomePage() {
           </p>
 
           <div className="mt-8 rounded-lg border border-neutral-200 p-5 sm:p-6">
-            <Generator onResult={setResult} />
+            <Generator
+              onResult={(res, topic) => {
+                setResult(res);
+                setLastTopic(topic);
+              }}
+              hasResult={result !== null}
+            />
           </div>
         </section>
 
-        {result && <Results result={result} />}
+        {result && <Results result={result} topic={lastTopic} />}
 
         <section className="mt-14 space-y-5">
           <h2 className="text-2xl font-bold tracking-tight text-neutral-900">
@@ -128,9 +135,9 @@ export default function HomePage() {
             <li>Copy each piece into YouTube Studio and edit as needed.</li>
           </ol>
           <p className="text-[15px] leading-relaxed text-neutral-700">
-            You can use a local model with Ollama (no key, stays on your
-            machine) or a cloud OpenAI-compatible key. The generator produces all
-            its output in a single request so it is fast.
+            Generation is handled for you by a hosted AI service, so there is
+            nothing to install or configure. The tool produces all its output in
+            a single request, so it is fast.
           </p>
         </section>
 

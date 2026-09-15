@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "test": "tsc src/lib/provider.ts src/lib/seo.ts --outDir .test-dist --module commonjs --target es2020 --skipLibCheck --esModuleInterop && node --test src/lib/provider.test.cjs"
+    "test": "tsc src/lib/provider.ts src/lib/seo.ts src/lib/analysis.ts --outDir .test-dist --module commonjs --target es2020 --skipLibCheck --esModuleInterop && node --test src/lib/provider.test.cjs src/lib/analysis.test.cjs"
   },
   "dependencies": {
     "next": "^15.2.3",

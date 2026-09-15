@@ -73,10 +73,9 @@ export default function AboutPage() {
         <p>
           First, your topic is processed to pull out the main keyword and a few
           long-tail variations. That structured context is then passed to a
-          generation step (a local AI model via Ollama, or an OpenAI-compatible
-          cloud model) that produces a naturally worded title, a clear
-          description, and a set of relevant tags. One request produces all four
-          outputs.
+          generation step (a hosted AI service) that produces a naturally
+          worded title, a clear description, and a set of relevant tags. One
+          request produces all four outputs.
         </p>
 
         <h2 className="text-base font-semibold text-neutral-900">

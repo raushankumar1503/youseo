@@ -20,14 +20,26 @@ export default function ContactPage() {
         </h1>
         <p className="mt-3 max-w-xl text-sm leading-relaxed text-neutral-700">
           Have a question, a bug report, or feedback on a guide? Send a message
-          below using your email app, or write directly to{" "}
-          <a
-            href={`mailto:${SITE.email}`}
-            className="text-neutral-700 underline hover:text-neutral-900"
-          >
-            {SITE.email}
-          </a>
-          . Expect a reply within a few days.
+          using the form below.
+          {SITE.email.trim() ? (
+            <>
+              {" "}
+              You can also write directly to{" "}
+              <a
+                href={`mailto:${SITE.email}`}
+                className="text-neutral-700 underline hover:text-neutral-900"
+              >
+                {SITE.email}
+              </a>
+              . Expect a reply within a few days.
+            </>
+          ) : (
+            <>
+              {" "}
+              This site is currently getting its public contact details ready,
+              so the form below is the best way to reach out.
+            </>
+          )}
         </p>
         <div className="mt-6 rounded-lg border border-neutral-200 p-5 sm:p-6">
           <ContactForm />

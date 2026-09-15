@@ -66,8 +66,7 @@ export default function TermsPage() {
         This tool is provided "as is", without warranties of any kind, express
         or implied. To the fullest extent permitted by law, we are not liable
         for any loss or damage arising from your use of or reliance on the tool
-        and its output. If local AI (Ollama) is configured, the tool depends on
-        your local setup and we cannot guarantee its availability.
+        and its output.
       </p>
 
       <h2 className="text-base font-semibold text-neutral-900">

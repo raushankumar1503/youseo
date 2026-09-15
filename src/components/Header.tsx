@@ -11,12 +11,12 @@ const links = [
 export default function Header() {
   return (
     <header className="border-b border-neutral-200">
-      <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-4 sm:px-6">
+      <div className="mx-auto flex max-w-3xl flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-4 sm:px-6">
         <Link href="/" className="text-sm font-semibold text-neutral-900">
           YouTube SEO Generator
         </Link>
         <nav aria-label="Main">
-          <ul className="flex items-center gap-4 sm:gap-5">
+          <ul className="flex flex-wrap items-center gap-x-4 gap-y-1 sm:gap-x-5">
             {links.map((link) => (
               <li key={link.href}>
                 <Link
